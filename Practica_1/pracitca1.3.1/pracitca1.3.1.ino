@@ -40,7 +40,7 @@ void loop() {
     digitalWrite(Pin_B, HIGH);
     delay(20);
   }
-//FAKIU
+//FAKIU6445
   analogWrite(Pin_EN, 255);
   delay(3000);
 
