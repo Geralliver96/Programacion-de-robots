@@ -1,55 +1,34 @@
-int Pin_EN = 11; 
-int Pin_A = 12;
-int Pin_B = 13;
+int Pin_EN = 3;
+ int Pin_A = 4;
+ int Pin_B = 4;
 
-void setup() {
-  pinMode(Pin_EN, OUTPUT);
-  pinMode(Pin_A, OUTPUT); 
-  pinMode(Pin_B, OUTPUT);
-}
+ void setup() {
+ pinMode(Pin_EN, OUTPUT);
+ pinMode(Pin_A, OUTPUT);
+ pinMode(Pin_B, OUTPUT);
 
-void loop() {
+ }
 
-  // a) Incremental hasta máxima velocidad en horario
-  for(int i=0; i<=255; i++){
-    analogWrite(Pin_EN, i);  
-    digitalWrite(Pin_A, HIGH);
-    digitalWrite(Pin_B, LOW);
-    delay(20); 
-  }
-  
-  // b) Mantiene máxima velocidad por 3 segs
-  analogWrite(Pin_EN, 255);
-  delay(3000);
+ void loop() {
+ // Giramos en un sentido
+ digitalWrite(Pin_A,HIGH);
+ digitalWrite(Pin_B,LOW);
+ analogWrite(Pin_EN,255); // Ponemos el motor a maxima velocidad
+ delay(5000);
 
-  // c) Decremental hasta detenerse
-  for(int i=255; i>=0; i--){
-    analogWrite(Pin_EN, i);
-    delay(20);
-  }
-
-  // d) Apagado por 3 segs
-  digitalWrite(Pin_A, LOW);
-  digitalWrite(Pin_B, LOW);  
-  delay(3000);
-
-  // e) Repite en sentido antihorario
-  for(int i=0; i<=255; i++){
-    analogWrite(Pin_EN, i);
-    digitalWrite(Pin_A, LOW);
-    digitalWrite(Pin_B, HIGH);
-    delay(20);
-  }
-//FAKIU6445
-  analogWrite(Pin_EN, 255);
-  delay(3000);
-
-  for(int i=255; i>=0; i--){
-    analogWrite(Pin_EN, i);
-    delay(20);
-  }
-
-  digitalWrite(Pin_A, LOW);
-  digitalWrite(Pin_B, LOW);
-  delay(3000);
-}
+ // detenemos el motor 2 s
+ digitalWrite(Pin_A,LOW);
+ digitalWrite(Pin_B,LOW);
+ analogWrite(Pin_EN,255);
+ delay(2000);
+ // Cambiamos direccion el giro del motor
+ digitalWrite(Pin_A,LOW);
+ digitalWrite(Pin_B,HIGH);
+ analogWrite(Pin_EN,127); //Ponemos el motor a velocidad intermedia
+ delay(5000);
+ // Detenemos el motor 2 S
+ digitalWrite(Pin_A,LOW);
+ digitalWrite(Pin_B,LOW);
+ analogWrite(Pin_EN,255);
+ delay(2000);
+ }
